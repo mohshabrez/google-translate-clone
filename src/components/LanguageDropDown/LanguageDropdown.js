@@ -11,13 +11,39 @@ const languages = [
 
 function LanguageDropdown({ label, value, onChange }) {
   const [languageOptions, setLanguageOptions] = useState(languages);
+  const[checklanguages, setCheckLanguages] = useState(null)
+
+  const optionsss = {
+    method: 'GET',
+    url: 'https://text-translator2.p.rapidapi.com/getLanguages',
+    headers: {
+      'X-RapidAPI-Key': '7ee5fd0af3mshae771e98355a7cbp12bc67jsn8c3a350e1fdf',
+      'X-RapidAPI-Host': 'text-translator2.p.rapidapi.com'
+    }
+  };
+  const getLanguages = async () => {
+      try {
+          const response = await axios.request(optionsss);
+          setCheckLanguages(response.data.data.languages);
+      } catch (error) {
+          console.error(error);
+      }
+  }
+  
+   useEffect(() => {
+      getLanguages()
+   },[])
+  
+
+
+
+
   const options = {
     method: "GET",
     url:
       "https://google-translate1.p.rapidapi.com/language/translate/v2/languages",
     headers: {
-      "Accept-Encoding": "application/gzip",
-      "X-RapidAPI-Key": "ce65fe287dmsh5d0c9975259cba5p148408jsnd5e91a9432bb",
+      "X-RapidAPI-Key": "7ee5fd0af3mshae771e98355a7cbp12bc67jsn8c3a350e1fdf",
       "X-RapidAPI-Host": "google-translate1.p.rapidapi.com"
     }
   };
@@ -25,7 +51,7 @@ function LanguageDropdown({ label, value, onChange }) {
   const getLanguage = async () => {
     try {
       const response = await axios.request(options);
-      console.log(response.data);
+
       setLanguageOptions(response.data.data.languages);
     } catch (error) {
       console.error(error);
@@ -45,9 +71,12 @@ function LanguageDropdown({ label, value, onChange }) {
         onChange={(e) => onChange(e.target.value)}
       >
         {languageOptions.map((option) => (
-          <option key={option.language} value={option.language}>
+            checklanguages.map((language) => option === language.code) ? (
+                <option key={option.language} value={option.language}>
             {option.language}
           </option>
+            ) : ("")
+          
         ))}
       </Form.Control>
     </Form.Group>

@@ -8,38 +8,49 @@ import microphone from "../../assets/microphone.png"
 import LanguageDropdown from "../LanguageDropDown/LanguageDropdown";
 import exchange from "../../assets/exchange.png"
 
+
 function TranslateApp() {
   const [sourceText, setSourceText] = useState("");
   const [translatedText, setTranslatedText] = useState("Translation");
   const [sourceLanguage, setSourceLanguage] = useState("en");
   const [targetLanguage, setTargetLanguage] = useState("en"); // Default target language is English
+  const [activatedTab, setActivatedTab] = useState(null)
 
-useEffect(() => {
-    detect()
-},[])
 
-const encodedParamss = new URLSearchParams();
-encodedParamss.set('q', 'English is hard, but detectably so');
+  const DEBOUNCE_DELAY = 800; // Adjust as needed
+  let debounceTimer;
 
+  const encodedParamss = new URLSearchParams();
+    encodedParamss.set('q', sourceText);
+
+    
 const optionss = {
-  method: 'POST',
-  url: 'https://google-translate1.p.rapidapi.com/language/translate/v2/detect',
-  headers: {
-    'content-type': 'application/x-www-form-urlencoded',
-    'Accept-Encoding': 'application/gzip',
-    'X-RapidAPI-Key': 'ce65fe287dmsh5d0c9975259cba5p148408jsnd5e91a9432bb',
-    'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
-  },
-  data: encodedParamss,
-};
-const detect = async () => {
-    try {
-        const response = await axios.request(optionss);
-        console.log(response.data.data);
-    } catch (error) {
-        console.error(error);
+    method: 'POST',
+    url: 'https://google-translate1.p.rapidapi.com/language/translate/v2/detect',
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded',
+      'X-RapidAPI-Key': '7ee5fd0af3mshae771e98355a7cbp12bc67jsn8c3a350e1fdf',
+      'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+    },
+    data: encodedParamss,
+  };
+
+  useEffect(() => {
+    // Debounced API call when searchInput changes
+    clearTimeout(debounceTimer);
+    if (sourceText) {
+      debounceTimer = setTimeout(async () => {
+        try {
+            const response = await axios.request(optionss);
+            setActivatedTab(response.data.data.detections[0][0].language);
+        } catch (error) {
+            console.error(error);
+        }
+      }, DEBOUNCE_DELAY);
     }
-}
+  }, [sourceText]);
+
+
 
 
   const encodedParams = new URLSearchParams();
@@ -52,7 +63,7 @@ const detect = async () => {
     url: "https://google-translate1.p.rapidapi.com/language/translate/v2",
     headers: {
       "content-type": "application/x-www-form-urlencoded",
-      "X-RapidAPI-Key": "ce65fe287dmsh5d0c9975259cba5p148408jsnd5e91a9432bb",
+      "X-RapidAPI-Key": "7ee5fd0af3mshae771e98355a7cbp12bc67jsn8c3a350e1fdf",
       "X-RapidAPI-Host": "google-translate1.p.rapidapi.com"
     },
     data: encodedParams
@@ -77,7 +88,7 @@ const detect = async () => {
       <div className="row">
         <div className="col-md-6">
             <div className="navsets">
-            <TabComponent
+            <TabComponent detectedlanguage={activatedTab}
             />
             <div className="chnagedrop">
                 <LanguageDropdown 

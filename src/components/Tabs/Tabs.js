@@ -3,11 +3,13 @@ import './Tabs.css'; // Create a CSS file for styling
 import LanguageDropdown from '../LanguageDropDown/LanguageDropdown';
 
 
-function TabComponent() {
+function TabComponent({detectedlanguage}) {
   const [activeTab, setActiveTab] = useState(0);
   const [targetLanguage, setTargetLanguage] = useState("en");
 
   const tabs = ['Detect', 'English', 'French'];
+
+ 
 
   const changeTab = (tabIndex) => {
     setActiveTab(tabIndex);
