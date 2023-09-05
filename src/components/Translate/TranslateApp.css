@@ -1,0 +1,60 @@
+.translate .row{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 1.7rem;
+}
+
+.translate .row textarea{
+    width: 95%;
+    border: #9e9d9d solid 1px;
+    border-radius: 6px;
+    font-size: 22px;
+    padding: 10px;
+    font-weight: bolder;
+    color: grey;
+    margin-top: -2rem;
+}
+
+.textareab{
+    background-color: #F5F5F5;
+    position: relative;
+    top: 1.4rem;
+}
+
+.navsets{
+    margin-bottom: 1rem;
+}
+
+.navsets .navhead{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem; 
+    text-decoration: none;
+    list-style-type: none;
+}
+
+.closimg{
+    width: 2%;
+    position: relative;
+    top: -9rem;
+    left: 37.4rem;
+}
+
+.microimg{
+    width: 3%;
+    position: relative;
+    top: -2rem;
+}
+
+.chnagedrop{
+    position: relative;
+    top: -1.2rem;
+    left: 16rem;
+}
+
+.exchnageimg{
+    width: 3%;
+    position: relative;
+    top: -1rem;
+    left: 58%;
+}

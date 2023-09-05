@@ -1,0 +1,31 @@
+.navBar{
+  display: flex; 
+  flex-direction: column;
+  margin-top: -1rem;  
+}
+
+.navBar .menuImg{
+    width: 2%;
+    height: 5%;
+    margin-left: 1rem;
+    position: relative;
+    top: -1.8rem;
+}
+
+.navBar .logoImg{
+    width: 12%;
+    height: 3%;
+    margin-left: 2rem;
+    margin-top: 0.1rem;
+}
+
+.navBar .section{
+    margin-top: -3.5rem;
+}
+
+.navBar .section img{
+   display: inline;
+   float: right;
+   width: 1.7%;
+   margin-right: 2rem;
+}

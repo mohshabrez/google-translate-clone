@@ -1,0 +1,22 @@
+.tab-container{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    margin-left: 2rem;
+}
+
+.active-tab {
+    padding-bottom: 1px;
+    border-bottom: blue solid 2px;
+    transition: width 0.3s;
+  }
+
+.tab{
+    font-size: 14px;
+    font-weight: bold;
+    color: gray;
+}
+
+
+ 
+  
