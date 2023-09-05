@@ -10,36 +10,9 @@ import exchange from "../../assets/exchange.png"
 
 function TranslateApp() {
   const [sourceText, setSourceText] = useState("");
-  const [translatedText, setTranslatedText] = useState("");
+  const [translatedText, setTranslatedText] = useState("Translation");
   const [sourceLanguage, setSourceLanguage] = useState("en");
   const [targetLanguage, setTargetLanguage] = useState("en"); // Default target language is English
-
-//   const url = 'https://google-translate1.p.rapidapi.com/language/translate/v2';
-// const options = {
-// 	method: 'POST',
-// 	headers: {
-// 		'content-type': 'application/x-www-form-urlencoded',
-// 		'Accept-Encoding': 'application/gzip',
-// 		'X-RapidAPI-Key': '8ffadf0403msh880041fc073be4dp199e81jsn50afc3694c80',
-// 		'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
-// 	},
-// 	body: new URLSearchParams({
-// 		q: sourceText,
-// 		target: targetLanguage,
-// 		source: sourceLanguage
-// 	})
-// };
-// const translateText = async () => {
-//     try {
-//         const response = await fetch(url, options);
-//         const result = await response.text();
-//         console.log(result);
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
-
-
 
   const encodedParams = new URLSearchParams();
   encodedParams.set("q", sourceText);
@@ -66,7 +39,10 @@ function TranslateApp() {
     }
   };
 
-  console.log(translatedText)
+  const handleClose = () => {
+    setSourceText("")
+    setTranslatedText("Translation")
+  }
 
   return (
     <div className="container mt-4 translate">
@@ -90,7 +66,7 @@ function TranslateApp() {
             onChange={(e) => setSourceText(e.target.value)}
           >
           </textarea>
-          <img src={close} alt="close" className="closimg"/>
+          <img src={close} alt="close" className="closimg" onClick={handleClose}/>
           <img src={microphone} alt="close" className="microimg"/>
         </div>
         <div className="col-md-6">
