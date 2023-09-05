@@ -17,7 +17,7 @@ function LanguageDropdown({ label, value, onChange }) {
       "https://google-translate1.p.rapidapi.com/language/translate/v2/languages",
     headers: {
       "Accept-Encoding": "application/gzip",
-      "X-RapidAPI-Key": "8ffadf0403msh880041fc073be4dp199e81jsn50afc3694c80",
+      "X-RapidAPI-Key": "ce65fe287dmsh5d0c9975259cba5p148408jsnd5e91a9432bb",
       "X-RapidAPI-Host": "google-translate1.p.rapidapi.com"
     }
   };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TranslateButton from "../TranslateButton/TranslateButton";
 import "./TranslateApp.css"
@@ -14,6 +14,34 @@ function TranslateApp() {
   const [sourceLanguage, setSourceLanguage] = useState("en");
   const [targetLanguage, setTargetLanguage] = useState("en"); // Default target language is English
 
+useEffect(() => {
+    detect()
+},[])
+
+const encodedParamss = new URLSearchParams();
+encodedParamss.set('q', 'English is hard, but detectably so');
+
+const optionss = {
+  method: 'POST',
+  url: 'https://google-translate1.p.rapidapi.com/language/translate/v2/detect',
+  headers: {
+    'content-type': 'application/x-www-form-urlencoded',
+    'Accept-Encoding': 'application/gzip',
+    'X-RapidAPI-Key': 'ce65fe287dmsh5d0c9975259cba5p148408jsnd5e91a9432bb',
+    'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+  },
+  data: encodedParamss,
+};
+const detect = async () => {
+    try {
+        const response = await axios.request(optionss);
+        console.log(response.data.data);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
   const encodedParams = new URLSearchParams();
   encodedParams.set("q", sourceText);
   encodedParams.set("target", targetLanguage);
@@ -24,7 +52,7 @@ function TranslateApp() {
     url: "https://google-translate1.p.rapidapi.com/language/translate/v2",
     headers: {
       "content-type": "application/x-www-form-urlencoded",
-      "X-RapidAPI-Key": "8ffadf0403msh880041fc073be4dp199e81jsn50afc3694c80",
+      "X-RapidAPI-Key": "ce65fe287dmsh5d0c9975259cba5p148408jsnd5e91a9432bb",
       "X-RapidAPI-Host": "google-translate1.p.rapidapi.com"
     },
     data: encodedParams
